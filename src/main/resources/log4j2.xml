@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <RollingRandomAccessFile name="App-File-Appender" fileName="/var/log/alexareview.log" filePattern="/var/log/archive/alexareview-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%X{traceId} %-5p %d [%t] %c app=alexareview version=${releaseVersion} : %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10" stopCustomActionsOnError="true">
+                <Delete basePath="/var/log/alexareview/archive/" maxDepth="1" followLinks="false">
+                    <IfFileName glob="alexareview*.log.gz" />
+                    <IfLastModified age="7d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingRandomAccessFile>
+    </Appenders>
+    <Loggers>
+        <asyncLogger name="org.apache.log4j.xml" level="info"/>
+        <asyncLogger name="com.netflix" level="error"/>
+        <asyncLogger name="com.nike" level="info"/>
+        <asyncLogger name="org.apache" level="ERROR"/>
+        <asyncLogger name="org.springframework" level="error" />
+        <asyncRoot level="info">
+            <AppenderRef ref="App-File-Appender"/>
+        </asyncRoot>
+    </Loggers>
+</Configuration>

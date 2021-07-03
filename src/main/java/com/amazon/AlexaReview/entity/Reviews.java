@@ -1,7 +1,7 @@
-package com.amazon.AlexaReview.model;
+package com.amazon.AlexaReview.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Table(name = "reviews")
@@ -29,8 +29,9 @@ public class Reviews {
     @Column(name = "product_name")
     private String product_name;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "reviewed_date")
-    private String reviewed_date;
+    private Date reviewed_date;
 
     public Reviews() {
 
@@ -91,15 +92,15 @@ public class Reviews {
         this.review_source = review_source;
     }
 
-    public String getReviewed_date() {
+    public Date getReviewed_date() {
         return reviewed_date;
     }
 
-    public void setReviewed_date(String reviewed_date) {
+    public void setReviewed_date(Date reviewed_date) {
         this.reviewed_date = reviewed_date;
     }
 
-    public Reviews(String review, String author, String review_source, int rating, String title, String product_name, String reviewed_date) {
+    public Reviews(String review, String author, String review_source, int rating, String title, String product_name, Date reviewed_date) {
         this.review = review;
         this.author = author;
         this.review_source = review_source;
