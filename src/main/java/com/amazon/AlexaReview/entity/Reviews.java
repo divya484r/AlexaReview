@@ -1,6 +1,14 @@
 package com.amazon.AlexaReview.entity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.GenerationType;
+import javax.persistence.Lob;
+import javax.persistence.Column;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.Date;
 
 @Entity
@@ -18,7 +26,7 @@ public class Reviews {
     private String author;
 
     @Column(name = "review_source")
-    private String review_source;
+    private String reviewSource;
 
     @Column(name = "rating")
     private int rating;
@@ -27,11 +35,11 @@ public class Reviews {
     private String title;
 
     @Column(name = "product_name")
-    private String product_name;
+    private String productName;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "reviewed_date")
-    private Date reviewed_date;
+    private Date reviewedDate;
 
     public Reviews() {
 
@@ -76,51 +84,51 @@ public class Reviews {
         this.title = title;
     }
 
-    public String getProduct_name() {
-        return product_name;
+    public String getReviewSource() {
+        return reviewSource;
     }
 
-    public void setProduct_name(String product_name) {
-        this.product_name = product_name;
+    public void setReviewSource(String reviewSource) {
+        this.reviewSource = reviewSource;
     }
 
-    public String getReview_source() {
-        return review_source;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setReview_source(String review_source) {
-        this.review_source = review_source;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public Date getReviewed_date() {
-        return reviewed_date;
+    public Date getReviewedDate() {
+        return (Date) reviewedDate.clone();
     }
 
-    public void setReviewed_date(Date reviewed_date) {
-        this.reviewed_date = reviewed_date;
+    public void setReviewedDate(Date reviewedDate) {
+        this.reviewedDate = (Date) reviewedDate.clone();
     }
 
-    public Reviews(String review, String author, String review_source, int rating, String title, String product_name, Date reviewed_date) {
+    public Reviews(String review, String author, String reviewSource, int rating, String title, String productName, Date reviewedDate) {
         this.review = review;
         this.author = author;
-        this.review_source = review_source;
+        this.reviewSource = reviewSource;
         this.rating = rating;
         this.title = title;
-        this.product_name = product_name;
-        this.reviewed_date = reviewed_date;
+        this.productName = productName;
+        this.reviewedDate = (Date) reviewedDate.clone();
     }
 
     @Override
     public String toString() {
-        return "Reviews{" +
-                "id=" + id +
-                ", review='" + review + '\'' +
-                ", author='" + author + '\'' +
-                ", review_source='" + review_source + '\'' +
-                ", rating=" + rating +
-                ", title='" + title + '\'' +
-                ", product_name='" + product_name + '\'' +
-                ", reviewed_date='" + reviewed_date + '\'' +
-                '}';
+        return "Reviews{"
+                + "id=" + id
+                + ", review='" + review + '\''
+                + ", author='" + author + '\''
+                + ", review_source='" + reviewSource + '\''
+                + ", rating=" + rating
+                + ", title='" + title + '\''
+                + ", product_name='" + productName + '\''
+                + ", reviewed_date='" + reviewedDate + '\''
+                + '}';
     }
 }

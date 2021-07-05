@@ -1,6 +1,5 @@
 package com.amazon.AlexaReview.model;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -11,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 })
 public class TotalRating {
     @JsonProperty("review_source")
-    private String review_source;
+    private String reviewSource;
 
     @JsonProperty("rating")
     private int rating;
@@ -19,12 +18,12 @@ public class TotalRating {
     @JsonProperty("totalRating")
     private long totalRating;
 
-    public String getReview_source() {
-        return review_source;
+    public String getReviewSource() {
+        return reviewSource;
     }
 
-    public void setReview_source(String review_source) {
-        this.review_source = review_source;
+    public void setReviewSource(String reviewSource) {
+        this.reviewSource = reviewSource;
     }
 
     public int getRating() {
@@ -43,8 +42,8 @@ public class TotalRating {
         this.totalRating = totalRating;
     }
 
-    public TotalRating(String review_source, int rating, long totalRating) {
-        this.review_source = review_source;
+    public TotalRating(String reviewSource, int rating, long totalRating) {
+        this.reviewSource = reviewSource;
         this.rating = rating;
         this.totalRating = totalRating;
     }

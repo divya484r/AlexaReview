@@ -2,7 +2,11 @@ plugins {
 	id 'org.springframework.boot' version '2.2.5.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'com.github.spotbugs' version '4.6.0' apply false
+	id 'org.sonarqube' version '3.0' apply false
 }
+apply from: file('gradle/check.gradle')
+
 
 group = 'com.amazon'
 version = '0.0.1-SNAPSHOT'
@@ -24,10 +28,13 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-logging'
+	implementation 'com.lmax:disruptor:3.3.7'
 	compile("org.springframework.boot:spring-boot-starter-log4j2")
 	compileOnly "org.projectlombok:lombok:1.16.16"
 	runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 }
 
 

@@ -18,8 +18,7 @@
     </Appenders>
     <Loggers>
         <asyncLogger name="org.apache.log4j.xml" level="info"/>
-        <asyncLogger name="com.netflix" level="error"/>
-        <asyncLogger name="com.nike" level="info"/>
+        <asyncLogger name="com.amazon" level="info"/>
         <asyncLogger name="org.apache" level="ERROR"/>
         <asyncLogger name="org.springframework" level="error" />
         <asyncRoot level="info">

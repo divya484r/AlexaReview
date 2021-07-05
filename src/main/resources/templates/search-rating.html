@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Search Review</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+
+<body>
+<div class="container my-5">
+    <h3> Search Review</h3>
+    <div class="card">
+        <p class="my-5">
+            <a href="/alexa/index" class="btn btn-primary">
+                <i class="fas fa-user-plus ml-2"> Home </i></a>
+        </p>
+        <div class="card-body">
+            <div class="col-md-10">
+                <form action="#" th:action="@{/alexa/searchReviews}" th:object="${review}"
+                      method="post">
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            <label for="reviewSource" class="col-form-label">Store Type</label>
+                            <input type="text" th:field="*{reviewSource}" class="form-control"
+                                   id="reviewSource" placeholder="Review source" />
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="rating" class="col-form-label">Rating</label>
+                            <input type="number" th:field="*{rating}" class="form-control"
+                                   id="rating" placeholder="Rating"  min="0" max="5" />
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="reviewedDate" class="col-form-label">Reviewed date</label>
+                            <input type="datetime-local" th:field="*{reviewedDate}" class="form-control"
+                                   id="reviewedDate" placeholder="Reviewed date" />
+                        </div>
+                        <div class="col-md-6">
+                            <input type="submit" class="btn btn-primary" value=" Search ">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div th:switch="${reviewsList}" class="container my-5">
+
+                <div class="col-md-10">
+                    <h2 th:case="null">No record found !!</h2>
+                    <div th:case="*">
+                        <table class="table table-striped table-responsive-md">
+                            <thead>
+                            <tr>
+                                <th>Review</th>
+                                <th>Author</th>
+                                <th>Review source</th>
+                                <th>Rating</th>
+                                <th>Title</th>
+                                <th>Product name</th>
+                                <th>Reviewed date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="reviews : ${reviewsList}">
+                                <td th:text="${reviews.reviewVal}"></td>
+                                <td th:text="${reviews.author}"></td>
+                                <td th:text="${reviews.reviewSource}"></td>
+                                <td th:text="${reviews.rating}"></td>
+                                <td th:text="${reviews.title}"></td>
+                                <td th:text="${reviews.productName}"></td>
+                                <td th:text="${reviews.reviewedDate}"></td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+    </div>
+</div>
+</body>
+
+</html>

@@ -5,27 +5,38 @@ import com.amazon.AlexaReview.model.AverageRating;
 import com.amazon.AlexaReview.model.Review;
 import com.amazon.AlexaReview.model.ReviewResult;
 import com.amazon.AlexaReview.model.TotalRating;
-import com.amazon.AlexaReview.repository.ReviewsRepository;
 import com.amazon.AlexaReview.service.ReviewService;
+
 import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+
 
 import java.util.List;
 import java.util.Optional;
 
 @Slf4j
-@RestController
+@Controller
 @CrossOrigin
 @RequestMapping("/alexa")
 public class AlexaReviewController {
 
     @Autowired
-    ReviewService reviewService;
+    private ReviewService reviewService;
+
 
     @PostMapping("/reviews")
     public ResponseEntity<?> createReview(@RequestBody Review review) {
@@ -39,22 +50,22 @@ public class AlexaReviewController {
 
     @GetMapping("/reviews")
     public ResponseEntity<?> getReviews(@RequestParam(required = false) String reviewDate,
-                                                         @RequestParam(required = false) Integer rating,
-                                                         @RequestParam(required = false) String storeType) {
+                                        @RequestParam(required = false) Integer rating,
+                                        @RequestParam(required = false) String storeType) {
         Optional<ReviewResult> results;
         try {
-        ReviewResult reviewsList = reviewService.searchReviews(reviewDate, rating, storeType);
+            ReviewResult reviewsList = reviewService.searchReviews(reviewDate, rating, storeType);
 
-        if(reviewsList != null){
-            System.out.println("reviewsList size="+ reviewsList.getReview().size());
-            results = Optional.of(reviewsList);
+            if (reviewsList != null) {
+                System.out.println("reviewsList size=" + reviewsList.getReview().size());
+                results = Optional.of(reviewsList);
 
-            return results.map(entity -> new ResponseEntity<>(entity, HttpStatus.OK))
-                    .orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
-        }else {
+                return results.map(entity -> new ResponseEntity<>(entity, HttpStatus.OK))
+                        .orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
+            } else {
 
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         } catch (Exception e) {
             return new ResponseEntity<String>(e.getLocalizedMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -63,7 +74,7 @@ public class AlexaReviewController {
     }
 
     @RequestMapping(value = "/totalRatingByCategory", method = RequestMethod.GET, produces = {"application/json"})
-    public ResponseEntity<?> getTotalRatingByCategory(){
+    public ResponseEntity<?> getTotalRatingByCategory() {
         List<TotalRating> totalRatings = reviewService.getTotalRating();
         JSONArray jsonArray = new JSONArray();
         jsonArray.addAll(totalRatings);
@@ -71,7 +82,7 @@ public class AlexaReviewController {
     }
 
     @RequestMapping(value = "/AverageMonthlyRating", method = RequestMethod.GET, produces = {"application/json"})
-    public ResponseEntity<?> getAverageMonthlyRating(){
+    public ResponseEntity<?> getAverageMonthlyRating() {
         List<AverageRating> monthlyAverageRatings = reviewService.getAverageRating();
         JSONArray jsonArray = new JSONArray();
         jsonArray.addAll(monthlyAverageRatings);
@@ -82,7 +93,7 @@ public class AlexaReviewController {
     public ResponseEntity<?> createReviewDump(@RequestBody ReviewResult review) {
         try {
             reviewService.createReviewDump(review);
-            return new ResponseEntity<>(null, HttpStatus.CREATED);
+            return new ResponseEntity<>("Success", HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<String>(e.getLocalizedMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }

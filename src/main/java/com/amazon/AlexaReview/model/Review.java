@@ -1,16 +1,16 @@
 package com.amazon.AlexaReview.model;
 
 
-import com.fasterxml.jackson.annotation.*;
-import lombok.Getter;
-import lombok.Setter;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
 import java.util.HashMap;
 import java.util.Map;
 
 
 @JsonPropertyOrder({
-
         "review",
         "author",
         "review_source",
@@ -23,21 +23,21 @@ public class Review {
 
 
     @JsonProperty("review")
-    private String review;
+    private String reviewVal;
 
     @JsonProperty("author")
     private String author;
 
     @JsonProperty("review_source")
-    private String review_source;
+    private String reviewSource;
     @JsonProperty("rating")
     private int rating;
     @JsonProperty("title")
     private String title;
     @JsonProperty("product_name")
-    private String product_name;
+    private String productName;
     @JsonProperty("reviewed_date")
-    private String reviewed_date;
+    private String reviewedDate;
 
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -52,12 +52,12 @@ public class Review {
         this.additionalProperties.put(name, value);
     }
 
-    public String getReview() {
-        return review;
+    public String getReviewVal() {
+        return reviewVal;
     }
 
-    public void setReview(String review) {
-        this.review = review;
+    public void setReviewVal(String reviewVal) {
+        this.reviewVal = reviewVal;
     }
 
     public String getAuthor() {
@@ -68,12 +68,12 @@ public class Review {
         this.author = author;
     }
 
-    public String getReview_source() {
-        return review_source;
+    public String getReviewSource() {
+        return reviewSource;
     }
 
-    public void setReview_source(String review_source) {
-        this.review_source = review_source;
+    public void setReviewSource(String reviewSource) {
+        this.reviewSource = reviewSource;
     }
 
     public int getRating() {
@@ -92,19 +92,19 @@ public class Review {
         this.title = title;
     }
 
-    public String getProduct_name() {
-        return product_name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProduct_name(String product_name) {
-        this.product_name = product_name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public String getReviewed_date() {
-        return reviewed_date;
+    public String getReviewedDate() {
+        return reviewedDate;
     }
 
-    public void setReviewed_date(String reviewed_date) {
-        this.reviewed_date = reviewed_date;
+    public void setReviewedDate(String reviewedDate) {
+        this.reviewedDate = reviewedDate;
     }
 }

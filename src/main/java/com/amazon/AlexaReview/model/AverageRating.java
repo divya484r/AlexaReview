@@ -6,24 +6,28 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
         "review_source",
         "month",
+        "year",
         "averageRating"
 })
 public class AverageRating {
     @JsonProperty("review_source")
-    private String review_source;
+    private String reviewSource;
 
     @JsonProperty("month")
     private int month;
 
+    @JsonProperty("year")
+    private int year;
+
     @JsonProperty("averageRating")
     private double averageRating;
 
-    public String getReview_source() {
-        return review_source;
+    public String getReviewSource() {
+        return reviewSource;
     }
 
-    public void setReview_source(String review_source) {
-        this.review_source = review_source;
+    public void setReviewSource(String reviewSource) {
+        this.reviewSource = reviewSource;
     }
 
     public int getMonth() {
@@ -42,9 +46,18 @@ public class AverageRating {
         this.averageRating = averageRating;
     }
 
-    public AverageRating(String review_source, int month, double averageRating) {
-        this.review_source = review_source;
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public AverageRating(String reviewSource,  int year, int month, double averageRating) {
+        this.reviewSource = reviewSource;
         this.month = month;
+        this.year = year;
         this.averageRating = averageRating;
     }
 }
